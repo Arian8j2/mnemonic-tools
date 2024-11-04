@@ -1,0 +1,3 @@
+[workspace]
+members = ["mnemonic-tools", "mnemonic-tools-cli"]
+resolver = "2"
