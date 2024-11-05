@@ -13,13 +13,13 @@ fn test_cli_generate_random() {
 }
 
 #[test]
-fn test_cli_make_valid() {
+fn test_cli_fix_last_word() {
     let input_words = [
         "satisfy", "spend", "denial", "mammal", "salon", "trade", "monster", "echo", "until",
         "stand", "say", "sting",
     ];
     let assert = mnemonic_tools_cli()
-        .arg("make-valid")
+        .arg("fix-last-word")
         .arg(input_words.join(" "))
         .assert();
     let output = assert.get_output().clone();

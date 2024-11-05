@@ -16,7 +16,7 @@ enum Command {
     /// Replaces last word of mnemonic words with random word that makes the mnemonic valid
     ///
     /// take in consideration that the input mnemonic words must contain valid words from mnemonic word list
-    MakeValid { mnemonic: String },
+    FixLastWord { mnemonic: String },
 
     /// Shows all possible valid last words for your mnemonic
     ///
@@ -29,7 +29,7 @@ fn main() -> anyhow::Result<()> {
     let args = Args::parse();
     match args.subcommand {
         Command::GenerateRandom => generate_random_mnemonic(),
-        Command::MakeValid { mnemonic } => make_mnemonic_valid(mnemonic)?,
+        Command::FixLastWord { mnemonic } => fix_mnemonic_last_word(mnemonic)?,
         Command::PossibleLastWords { mnemonic } => possible_last_words(mnemonic)?,
     }
     Ok(())
@@ -43,7 +43,7 @@ fn generate_random_mnemonic() {
     println!("{}", words.join(" "));
 }
 
-fn make_mnemonic_valid(mnemonic: String) -> anyhow::Result<()> {
+fn fix_mnemonic_last_word(mnemonic: String) -> anyhow::Result<()> {
     let words = mnemonic.split(" ").collect::<Vec<_>>();
     ensure!(
         words.len() == mnemonic_tools::WORD_LEN,
