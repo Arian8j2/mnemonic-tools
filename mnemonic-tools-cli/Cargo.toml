@@ -8,3 +8,6 @@ anyhow = "1.0.91"
 clap = { version = "4.5.20", features = ["derive"] }
 mnemonic-tools = { path = "../mnemonic-tools" }
 rand = "0.8.5"
+
+[dev-dependencies]
+assert_cmd = "2.0.16"
