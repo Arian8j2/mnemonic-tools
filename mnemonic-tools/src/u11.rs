@@ -54,3 +54,9 @@ impl U11 {
         buffer
     }
 }
+
+impl From<U11> for usize {
+    fn from(value: U11) -> Self {
+        value.0 as Self
+    }
+}
