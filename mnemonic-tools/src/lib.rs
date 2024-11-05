@@ -8,11 +8,13 @@ use sha2::Digest;
 
 const BITS_PER_BYTE: usize = 8;
 
-pub const WORD_LEN: usize = 12;
-
 const ENTROPY_BITS: usize = 128;
 
 pub const ENTROPY_BYTES: usize = ENTROPY_BITS / BITS_PER_BYTE;
+
+const CHECKSUM_BITS: usize = 4;
+
+pub const WORD_LEN: usize = (ENTROPY_BITS + CHECKSUM_BITS) / U11::SIZE;
 
 pub fn indices_to_mnemonic_words(indices: &[U11]) -> Vec<&'static str> {
     indices
@@ -25,10 +27,12 @@ pub fn indices_to_mnemonic_words(indices: &[U11]) -> Vec<&'static str> {
         .collect()
 }
 
+/// takes entropy and calculates checksum and turns the bytes to wordlist indices
 pub fn entropy_to_indices(entropy: &[u8]) -> Vec<U11> {
     entropy_and_checksum_to_indices(entropy, calculate_entropy_checksum(entropy))
 }
 
+/// turns entropy + checksum bytes to wordlist indices
 pub fn entropy_and_checksum_to_indices(entropy: &[u8], checksum: u8) -> Vec<U11> {
     assert_eq!(entropy.len(), ENTROPY_BYTES);
     let mut entropy_with_checksum = entropy.to_vec();
