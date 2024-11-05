@@ -49,8 +49,8 @@ fn make_mnemonic_valid(mnemonic: String) -> anyhow::Result<()> {
     let (mut entropy, _) = mnemonic_tools::mnemonic_words_to_entropy(&words)?;
     // last word is 7 bit entropy and 4 bit checksum
     let seven_bit_random_mask = rand::random::<u8>() | 0b1000_0000;
-    println!("mask: {seven_bit_random_mask}");
-    *entropy.last_mut().unwrap() &= seven_bit_random_mask;
+    *entropy.last_mut().unwrap() &= 0b1000_0000;
+    *entropy.last_mut().unwrap() |= seven_bit_random_mask;
 
     let indices = mnemonic_tools::entropy_to_indices(&entropy);
     let words = mnemonic_tools::indices_to_mnemonic_words(&indices);
