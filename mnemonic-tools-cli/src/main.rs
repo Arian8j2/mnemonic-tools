@@ -10,13 +10,18 @@ struct Args {
 
 #[derive(clap::Subcommand)]
 enum Command {
-    #[clap(about = "Generates random valid mnemonic")]
+    /// Generates random valid mnemonic
     GenerateRandom,
 
-    #[clap(about = "Replaces last word with random word that makes valid mnemonic")]
+    /// Replaces last word of mnemonic words with random word that makes the mnemonic valid
+    ///
+    /// take in consideration that the input mnemonic words must contain valid words from mnemonic word list
     MakeValid { mnemonic: String },
 
-    #[clap(about = "Shows all possible valid last words for your mnemonic")]
+    /// Shows all possible valid last words for your mnemonic
+    ///
+    /// in mnemonic words some bits of last word is used as checksum of all the entropy
+    /// this command shows all possible last words that makes that checksum valid
     PossibleLastWords { mnemonic: String },
 }
 
