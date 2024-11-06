@@ -1,3 +1,5 @@
+#![no_std]
+
 mod english_wordlist;
 pub use english_wordlist::ENGLISH_WORD_LIST;
 
@@ -5,6 +7,9 @@ mod u11;
 pub use u11::U11;
 
 use sha2::Digest;
+
+extern crate alloc;
+use alloc::vec::Vec;
 
 const BITS_PER_BYTE: usize = 8;
 

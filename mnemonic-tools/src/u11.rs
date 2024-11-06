@@ -1,4 +1,5 @@
 use super::BITS_PER_BYTE;
+use alloc::{vec, vec::Vec};
 
 /// structure representing **11 bit unsigned integer**
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
